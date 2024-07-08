@@ -101,8 +101,11 @@ export class FikaSendItemController {
 
         for (const profile of Object.values(profiles)) {
             const username = profile.info.username;
+            const nickname = profile.characters.pmc?.Info?.Nickname;
+            const level = profile.characters.pmc?.Info?.Level;
+            const key = nickname ? `${nickname} (${username}) [${level}]` : `<no PMC found> (${username})`;
             if (!(username in result) && username !== sender.info.username) {
-                result[username] = profile.info.id;
+                result[key] = profile.info.id;
             }
         }
 
